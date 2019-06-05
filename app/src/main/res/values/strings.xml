@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">GMedicalCare</string>
-    <string name="tab_text_1">Tab 1</string>
-    <string name="tab_text_2">Tab 2</string>
+    <string name="tab_1">Consultas</string>
+    <string name="tab_2">Perfil</string>
     <string name="server_client_id">892599001263-c1vp0h05mmmef15b52pl5sk5fppr4i86.apps.googleusercontent.com</string>
 </resources>
