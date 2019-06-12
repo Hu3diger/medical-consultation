@@ -8,12 +8,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.Task;
 
 public class TelaLogin extends AppCompatActivity {
@@ -21,6 +23,7 @@ public class TelaLogin extends AppCompatActivity {
     int RC_SIGN_IN = 0;
     SignInButton signInButton;
     GoogleSignInClient mGoogleSignInClient;
+    GoogleApiClient mGoogleApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,10 +31,16 @@ public class TelaLogin extends AppCompatActivity {
         setContentView(R.layout.activity_tela_login);
 
         signInButton = findViewById(R.id.sign_in_button);
+
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail().build();
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this, null)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,5 +91,9 @@ public class TelaLogin extends AppCompatActivity {
             startActivity(new Intent(TelaLogin.this, MainActivity.class));
         }
         super.onStart();
+    }
+
+    public void signOut(){
+        mGoogleApiClient.disconnect();
     }
 }
