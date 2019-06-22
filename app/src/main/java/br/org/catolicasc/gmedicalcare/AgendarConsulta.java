@@ -95,8 +95,6 @@ public class AgendarConsulta extends AppCompatActivity {
     }
 
     public void callCalendar() {
-
-        System.out.println(myCalendar.get(Calendar.DAY_OF_MONTH));
         // Run query
         Cursor cur = null;
         ContentResolver cr = getContentResolver();
@@ -127,9 +125,9 @@ public class AgendarConsulta extends AppCompatActivity {
 
     public void insertEvent() {
         Calendar beginTime = Calendar.getInstance();
-        beginTime.set(2012, 0, 19, 7, 30);
+        beginTime.set((myCalendar.getTime().getYear()+1900), (myCalendar.getTime().getMonth()+1), myCalendar.getTime().getDate(), 7, 30);
         Calendar endTime = Calendar.getInstance();
-        endTime.set(2012, 0, 19, 8, 30);
+        endTime.set((myCalendar.getTime().getYear()+1900), (myCalendar.getTime().getMonth()+1), myCalendar.getTime().getDate(), 8, 00);
         Intent intent = new Intent(Intent.ACTION_INSERT)
                 .setData(CalendarContract.Events.CONTENT_URI)
                 .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())

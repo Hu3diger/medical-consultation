@@ -3,18 +3,4 @@
     <string name="tab_1">Consultas</string>
     <string name="tab_2">Perfil</string>
     <string name="server_client_id">892599001263-c1vp0h05mmmef15b52pl5sk5fppr4i86.apps.googleusercontent.com</string>
-    <string-array name="teste">
-        <item>10:00</item>
-        <item>10:30</item>
-        <item>11:00</item>
-        <item>11:30</item>
-        <item>14:00</item>
-        <item>14:30</item>
-        <item>15:00</item>
-        <item>15:30</item>
-        <item>16:00</item>
-        <item>16:30</item>
-        <item>17:00</item>
-        <item>17:30</item>
-    </string-array>
 </resources>
