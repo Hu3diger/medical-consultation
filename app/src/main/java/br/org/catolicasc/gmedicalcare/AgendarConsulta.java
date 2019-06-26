@@ -1,10 +1,7 @@
 package br.org.catolicasc.gmedicalcare;
 
 import android.app.DatePickerDialog;
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.CalendarContract;
 import android.support.v7.app.AppCompatActivity;
@@ -21,19 +18,6 @@ import java.util.Locale;
 
 public class AgendarConsulta extends AppCompatActivity {
 
-    // Projection array. Creating indices for this array instead of doing
-    // dynamic lookups improves performance.
-    public static final String[] EVENT_PROJECTION = new String[]{
-            CalendarContract.Calendars._ID,                           // 0
-            CalendarContract.Calendars.ACCOUNT_NAME,                  // 1
-            CalendarContract.Calendars.CALENDAR_DISPLAY_NAME,         // 2
-            CalendarContract.Calendars.OWNER_ACCOUNT                  // 3
-    };
-    // The indices for the projection array above.
-    private static final int PROJECTION_ID_INDEX = 0;
-    private static final int PROJECTION_ACCOUNT_NAME_INDEX = 1;
-    private static final int PROJECTION_DISPLAY_NAME_INDEX = 2;
-    private static final int PROJECTION_OWNER_ACCOUNT_INDEX = 3;
     final Calendar myCalendar = Calendar.getInstance();
     private EditText sintomas, dataConsulta;
     private Spinner spinner;
@@ -81,61 +65,43 @@ public class AgendarConsulta extends AppCompatActivity {
         btnSchedule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callCalendar();
+                insertEvent();
             }
         });
     }
 
     private void updateLabel() {
-
         String myFormat = "dd/MM/yyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, new Locale("pt", "BR"));
 
         dataConsulta.setText(sdf.format(myCalendar.getTime()));
     }
 
-    public void callCalendar() {
-        // Run query
-        Cursor cur = null;
-        ContentResolver cr = getContentResolver();
-        Uri uri = CalendarContract.Calendars.CONTENT_URI;
-        String selection = "((" + CalendarContract.Calendars.ACCOUNT_NAME + " = ?) AND ("
-                + CalendarContract.Calendars.ACCOUNT_TYPE + " = ?) AND ("
-                + CalendarContract.Calendars.OWNER_ACCOUNT + " = ?))";
-        String[] selectionArgs = new String[]{"martinruediger2010@gmail.com", "com.google",
-                "martinruediger2010@gmail.com"};
-        // Submit the query and get a Cursor object back.
-        cur = cr.query(uri, EVENT_PROJECTION, selection, selectionArgs, null);
-        // Use the cursor to step through the returned records
-        while (cur.moveToNext()) {
-            long calID = 0;
-            String displayName = null;
-            String accountName = null;
-            String ownerName = null;
-
-            // Get the field values
-            calID = cur.getLong(PROJECTION_ID_INDEX);
-            displayName = cur.getString(PROJECTION_DISPLAY_NAME_INDEX);
-            accountName = cur.getString(PROJECTION_ACCOUNT_NAME_INDEX);
-            ownerName = cur.getString(PROJECTION_OWNER_ACCOUNT_INDEX);
+    public void insertEvent() {
+        String[] beginTimeSplitted = spinner.getSelectedItem().toString().split("\\:");
+        int[] endTimeSplitted = new int[2];
+        if (Integer.parseInt(beginTimeSplitted[1]) == 30) {
+            endTimeSplitted[0] = Integer.parseInt(beginTimeSplitted[0]) + 1;
+            endTimeSplitted[1] = 00;
+        } else {
+            endTimeSplitted[0] = Integer.parseInt(beginTimeSplitted[0]);
+            endTimeSplitted[1] = 30;
         }
 
-        insertEvent();
-    }
 
-    public void insertEvent() {
         Calendar beginTime = Calendar.getInstance();
-        beginTime.set((myCalendar.getTime().getYear()+1900), (myCalendar.getTime().getMonth()+1), myCalendar.getTime().getDate(), 7, 30);
+        beginTime.set((myCalendar.getTime().getYear() + 1900), (myCalendar.getTime().getMonth()), myCalendar.getTime().getDate(), Integer.parseInt(beginTimeSplitted[0]), Integer.parseInt(beginTimeSplitted[1]));
         Calendar endTime = Calendar.getInstance();
-        endTime.set((myCalendar.getTime().getYear()+1900), (myCalendar.getTime().getMonth()+1), myCalendar.getTime().getDate(), 8, 00);
+        endTime.set((myCalendar.getTime().getYear() + 1900), (myCalendar.getTime().getMonth()), myCalendar.getTime().getDate(), endTimeSplitted[0], endTimeSplitted[1]);
         Intent intent = new Intent(Intent.ACTION_INSERT)
                 .setData(CalendarContract.Events.CONTENT_URI)
                 .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, beginTime.getTimeInMillis())
                 .putExtra(CalendarContract.EXTRA_EVENT_END_TIME, endTime.getTimeInMillis())
-                .putExtra(CalendarContract.Events.TITLE, "Conulta Médica - Dr. José Alface")
+                .putExtra(CalendarContract.Events.TITLE, "Conulta Médica \n Dr. Luiz de Alencar Alface")
                 .putExtra(CalendarContract.Events.DESCRIPTION, "Sintomas: " + sintomas.getText())
                 .putExtra(CalendarContract.Events.EVENT_LOCATION, "Clínica Alface's - Rua José Teodoro Brasileiro, 2574, Sala 2")
-                .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY);
+                .putExtra(CalendarContract.Events.AVAILABILITY, CalendarContract.Events.AVAILABILITY_BUSY)
+                .putExtra(Intent.EXTRA_EMAIL, "meegamc@gmail.com");
 
         startActivity(intent);
 

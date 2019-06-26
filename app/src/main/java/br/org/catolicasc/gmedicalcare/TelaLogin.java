@@ -2,8 +2,8 @@ package br.org.catolicasc.gmedicalcare;
 
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -22,7 +22,7 @@ public class TelaLogin extends AppCompatActivity {
 
     int RC_SIGN_IN = 0;
     SignInButton signInButton;
-    GoogleSignInClient mGoogleSignInClient;
+    public static GoogleSignInClient mGoogleSignInClient;
     GoogleApiClient mGoogleApiClient;
 
     @Override
@@ -91,9 +91,5 @@ public class TelaLogin extends AppCompatActivity {
             startActivity(new Intent(TelaLogin.this, MainActivity.class));
         }
         super.onStart();
-    }
-
-    public void signOut(){
-        mGoogleApiClient.disconnect();
     }
 }

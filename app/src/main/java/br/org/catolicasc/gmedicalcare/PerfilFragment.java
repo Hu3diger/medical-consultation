@@ -1,5 +1,6 @@
 package br.org.catolicasc.gmedicalcare;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,12 +13,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.squareup.picasso.Picasso;
 
 public class PerfilFragment extends Fragment {
 
     private TextView profileName, profileEmail;
     private ImageView profileImage;
     private Button signOut;
+    private GoogleSignInClient mGoogleSignInClient;
 
     @Nullable
     @Override
@@ -25,7 +31,7 @@ public class PerfilFragment extends Fragment {
         View view = inflater.inflate(R.layout.perfil_fragment, container, false);
 
         MainActivity activity = (MainActivity) getActivity();
-        GoogleSignInAccount account = activity.getUserData();
+        final GoogleSignInAccount account = activity.getUserData();
 
 
         profileName = view.findViewById(R.id.profile_text);
@@ -36,7 +42,23 @@ public class PerfilFragment extends Fragment {
 
         profileName.setText("Name: " + account.getDisplayName());
         profileEmail.setText("E-Mail: " + account.getEmail());
-        profileImage.setImageURI(account.getPhotoUrl());
+
+        Picasso.with(getContext()).load(account.getPhotoUrl())
+                .into(profileImage);
+
+        signOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TelaLogin.mGoogleSignInClient.signOut().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        Intent intent = new Intent(getContext(), TelaLogin.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intent);
+                    }
+                });
+            }
+        });
 
         return view;
     }
