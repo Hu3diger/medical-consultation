@@ -33,12 +33,14 @@
         android:layout_marginBottom="8dp"
         android:ems="10"
         android:fontFamily="@font/roboto"
+        android:textColorHighlight="@color/colorPrimary"
+        android:textColorLink="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.159"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.244" />
+        app:layout_constraintVertical_bias="0.367" />
 
     <EditText
         android:id="@+id/data_consulta"
@@ -51,12 +53,14 @@
         android:ems="10"
         android:fontFamily="@font/roboto"
         android:inputType="none"
+        android:textColorHighlight="@color/colorPrimary"
+        android:textColorLink="@color/colorPrimaryDark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.123"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sintomas"
-        app:layout_constraintVertical_bias="0.072" />
+        app:layout_constraintVertical_bias="0.101" />
 
     <Button
         android:id="@+id/btnSchedule"
@@ -66,6 +70,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:background="@color/colorButton"
         android:fontFamily="@font/roboto"
         android:text="Agendar"
         android:textStyle="bold"
@@ -91,7 +96,7 @@
         app:layout_constraintHorizontal_bias="0.1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sintomas"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.909" />
 
     <TextView
         android:id="@+id/textView3"
@@ -99,7 +104,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="4dp"
         android:fontFamily="@font/roboto"
         android:text="Sintomas"
         app:layout_constraintBottom_toTopOf="@+id/sintomas"
@@ -121,7 +126,7 @@
         app:layout_constraintHorizontal_bias="0.162"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/data_consulta"
-        app:layout_constraintVertical_bias="0.076" />
+        app:layout_constraintVertical_bias="0.087" />
 
     <TextView
         android:id="@+id/textView4"
@@ -137,7 +142,7 @@
         app:layout_constraintHorizontal_bias="0.112"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/data_consulta"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.2" />
 
     <Button
         android:id="@+id/btnDate"
@@ -145,11 +150,35 @@
         android:layout_height="41dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
+        android:background="@color/colorButton"
         android:text="Selecionar"
         app:layout_constraintBottom_toBottomOf="@+id/data_consulta"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.011"
         app:layout_constraintStart_toEndOf="@+id/data_consulta"
         app:layout_constraintTop_toTopOf="@+id/data_consulta"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="323dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Você será redicionado ao aplicativo da agenda, e lá, você poderá salvá-la."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="323dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:text='Para realizar o agendamento, preencha os campos abaixo, e clique no botão "AGENDAR"'
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 </android.support.constraint.ConstraintLayout>

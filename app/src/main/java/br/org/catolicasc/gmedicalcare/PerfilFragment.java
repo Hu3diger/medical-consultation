@@ -1,6 +1,7 @@
 package br.org.catolicasc.gmedicalcare;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -44,6 +45,7 @@ public class PerfilFragment extends Fragment {
         profileEmail.setText("E-Mail: " + account.getEmail());
 
         Picasso.with(getContext()).load(account.getPhotoUrl())
+                .placeholder(R.drawable.placeholder)
                 .into(profileImage);
 
         signOut.setOnClickListener(new View.OnClickListener() {
