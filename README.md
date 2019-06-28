@@ -8,7 +8,6 @@ São requisitos para este sistema:
   - Deve integrar com o serviço de calendário do google.
   - Ao realizar a consulta, ela deve ser marcada do calendário do médico E do paciente.
   - Deve listar as consultas dentro do app.
-  - Deve ser possível cancelar a consulta um dia antes da data da mesma.
 
 
 
