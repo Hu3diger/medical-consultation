@@ -1,8 +1,12 @@
 package br.org.catolicasc.gmedicalcare;
 
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -79,7 +83,7 @@ public class TelaLogin extends AppCompatActivity {
     @Override
     protected void onStart() {
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if(account != null) {
+        if (account != null) {
             startActivity(new Intent(TelaLogin.this, MainActivity.class));
         }
         super.onStart();
