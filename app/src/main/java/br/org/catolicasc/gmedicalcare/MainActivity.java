@@ -1,4 +1,4 @@
-package br.org.catolicasc.gmedicalcaTabLayoutre;
+package br.org.catolicasc.gmedicalcare;
 
 import android.Manifest;
 import android.content.Intent;
@@ -18,6 +18,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import br.org.catolicasc.gmedicalcare.AgendarConsulta;
 import br.org.catolicasc.gmedicalcare.ConsultasFragment;
+import br.org.catolicasc.gmedicalcare.PerfilFragment;
 import br.org.catolicasc.gmedicalcare.R;
 import br.org.catolicasc.gmedicalcare.ui.main.SectionsPagerAdapter;
 
